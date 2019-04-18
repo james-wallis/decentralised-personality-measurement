@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import * as Survey from "survey-react";
-import './Questionnaire.css';
 import "survey-react/survey.css";
+import formatResults from '../modules/formatSurveyResults'
+import getRating from '../modules/getRatingFromSurveyResults'
 
 
 
@@ -74,35 +75,16 @@ class Questionnaire extends Component {
       },
     ]
   };
-
   //Define a callback methods on survey complete
-  onComplete(survey) {
+  onComplete = async (survey) => {
     // Only one key in the survey
     const key = Object.keys(survey.data)[0];
-    const results = survey.data[key];
-    // Format results - Reverse even question's answer, take average of pairs (1 & 2, 3 & 4, etc)
-    // Q 1,2 = Extraversion
-    // Q 3,4 = Agreeableness
-    // Q 5,6 = Conscientiousness
-    // Q 7,8 = Emotional Stablity
-    // Q 9,10 = Openness to Experiences
-    const personality = {
-      'extraversion': 0,
-      'agreeableness': 0,
-      'conscientiousness': 0,
-      'emotionalStability': 0,
-      'opennessToExperiences': 0,
-    }
-    const reverse = [7,6,5,4,3,2,1];
-    let i = 1;
-    for (const key in personality) {
-      // Reverse even question, take average of preceding odd and even number
-      const resultReversed = reverse[(results[i + 1] - 1)];
-      personality[key] = (parseInt(results[i]) + resultReversed) / 2;
-      i+=2;
-    }
-    // Combine results to get personality information
-    console.log(personality);
+    // Format results into the format specified by the Ten Item Personality Measure
+    const results = await formatResults(survey.data[key]);
+    // Add rating to results by comparing against the norms in the Ten Item Personality Paper
+    const personality = await getRating(results);
+    // Pass personality up a component
+    this.props.setPersonality(personality);
   }
   render() {
     var model = new Survey.Model(this.json);

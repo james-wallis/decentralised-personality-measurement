@@ -13,6 +13,7 @@
     "react-scripts": "2.1.8",
     "react-select": "^2.4.3",
     "solid-auth-client": "^2.3.0",
+    "solid-file-client": "^0.4.9",
     "styled-components": "^4.2.0",
     "survey-react": "^1.0.81"
   },

@@ -1,3 +1,39 @@
 .App {
   text-align: center;
 }
+
+header {
+  background-color: #282c34;
+  min-height: 5vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 2vmin;
+  color: white;
+}
+
+header div {
+  padding: 0 20px;
+}
+
+header div a {
+  color: #61dafb;
+}
+
+@media (min-width: 768px) {
+  .sv_main .sv_container .sv_body .sv_p_root table.sv_q_matrix td {
+    min-width: 6em !important;
+  }
+}
+
+.personalityTraitDivs {
+  text-transform: capitalize;
+}
+
+.personalityTraitDivs p {
+  margin: 5px;
+}
+.personalityTraitDivs p:first-child {
+  margin: 20px 0 5px;
+}

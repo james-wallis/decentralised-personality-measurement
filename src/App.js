@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Header from './components/Header';
-import Questionnaire from './components/Questionnaire';
+import Body from './components/Body';
 
 const auth = require('solid-auth-client')
 
@@ -38,7 +38,7 @@ class App extends Component {
     return (
       <div className="App">
         <Header loggedIn={this.state.loggedIn} id={this.state.id}/>
-        <Questionnaire />
+        <Body />
       </div>
     );
   }
