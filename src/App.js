@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Header from './components/Header';
 import Body from './components/Body';
+import { LoggedOut, LoggedIn, LoginButton } from '@solid/react'
 
 const auth = require('solid-auth-client')
 
@@ -33,12 +34,17 @@ class App extends Component {
       }
     })
   }
-
   render() {
     return (
       <div className="App">
-        <Header loggedIn={this.state.loggedIn} id={this.state.id}/>
-        <Body />
+        <LoggedOut>
+          <h1>To use this project you must log in to Solid.</h1>
+          <LoginButton popup="popup.html" />
+        </LoggedOut>
+        <LoggedIn>
+          <Header loggedIn={this.state.loggedIn} id={this.state.id} />
+          <Body />
+        </LoggedIn>
       </div>
     );
   }
