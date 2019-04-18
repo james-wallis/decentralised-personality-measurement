@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 class DisplayPersonalityData extends Component {
   render() {
     const obj = this.props.personality;
+    const fileUrl = this.props.url;
+    console.log('fileUrl', fileUrl);
     return (
       <div>
         <h1>Your Personality</h1>
@@ -14,6 +16,12 @@ class DisplayPersonalityData extends Component {
             <p>Value = {obj[key].result}</p>
           </div>
         ))}
+        {(fileUrl) ? 
+          <div>
+            <h2>The saved file is located at:</h2>
+            <a href={fileUrl} target='_blank' rel='noopener noreferrer'>{fileUrl}</a>
+          </div>
+          : null}
       </div>
     );
   }

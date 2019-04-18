@@ -12,20 +12,22 @@ class Body extends Component {
   }
 
   setPersonality = (p) => {
+    this.saveFile(p);
     this.setState({
       personality: p
     })
   }
 
-  componentDidUpdate() {
-    console.log('component updated');
-    console.log(this.state.personality);
-    if (this.state.personality) saveToSolid();
+  saveFile = async (p) => {
+    const fileUrl = await saveToSolid(p);
+    if (fileUrl) this.setState({
+      url: fileUrl
+    })
   }
 
   render() {
     const content = (this.state.personality) 
-    ? <DisplayPersonality personality={this.state.personality} />
+    ? <DisplayPersonality personality={this.state.personality} url={this.state.url} />
     : <Questionnaire setPersonality={this.setPersonality} />;
     return (
       <div className="bodySection">

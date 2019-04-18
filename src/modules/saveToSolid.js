@@ -1,15 +1,23 @@
 const fileClient = require('solid-file-client');
 
-const savePersonality = (personality) => {
-  fileClient.checkSession().then(session => {
-    console.log("Logged in as " + session.webId)
-  }, err => console.log(err));
-
-  
-  // fileClient.updateFile(url, newContent, contentType).then(success => {
-  //   console.log(`Updated ${url}.`)
-  // }, err => console.log(err));
-
+// Save the personality data to a file
+// Returns false if it fails, and the url is success
+const savePersonality = async (personality) => {
+  try {
+    console.log('saveToSolid called');
+    console.log(personality);
+    const { webId } = await fileClient.checkSession()
+    console.log("Logged in as " + webId);
+    const splitWebId = webId.split('/profile');
+    const url = `${splitWebId[0]}/private/test.json`;
+    const fileCreated = await fileClient.updateFile(url, JSON.stringify(personality));
+    console.log('file created:', fileCreated);
+    return url;
+  } catch (err) {
+    console.error('Error in saveToSolid.js');
+    console.error(err);
+    return false;
+  }  
 }
 
-module.exports = savePersonality;
+export default savePersonality;

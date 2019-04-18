@@ -37,3 +37,15 @@ header div a {
 .personalityTraitDivs p:first-child {
   margin: 20px 0 5px;
 }
+
+button {
+  background-color:rgb(87, 138, 172); /* Green */
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+}
