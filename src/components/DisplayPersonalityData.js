@@ -4,6 +4,7 @@ class DisplayPersonalityData extends Component {
   render() {
     const obj = this.props.personality;
     const fileUrl = this.props.url;
+    const linkedDataUrl = this.props.linkedData;
     console.log('fileUrl', fileUrl);
     return (
       <div>
@@ -16,10 +17,11 @@ class DisplayPersonalityData extends Component {
             <p>Value = {obj[key].result}</p>
           </div>
         ))}
-        {(fileUrl) ? 
+        {(fileUrl && linkedDataUrl) ? 
           <div>
-            <h2>The saved file is located at:</h2>
-            <a href={fileUrl} target='_blank' rel='noopener noreferrer'>{fileUrl}</a>
+            <h2>The created files are located at:</h2>
+            <a href={fileUrl} target='_blank' rel='noopener noreferrer'>Linked Data file (public): {linkedDataUrl}</a>
+            <a href={fileUrl} target='_blank' rel='noopener noreferrer'>Personality file (private): {fileUrl}</a>
           </div>
           : null}
       </div>

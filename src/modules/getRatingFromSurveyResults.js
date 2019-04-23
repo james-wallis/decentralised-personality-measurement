@@ -23,9 +23,11 @@ const getRating = (results) => {
     // Give personality the result (int) and score (string)
     personality[key] = {
       result: result,
-      score: score
+      score: score,
+      norm: rating[1]
     }
   }
+  console.dir(personality)
   return personality;
 }
 

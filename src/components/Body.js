@@ -19,15 +19,16 @@ class Body extends Component {
   }
 
   saveFile = async (p) => {
-    const fileUrl = await saveToSolid(p);
+    const { fileUrl, linkedDataUrl } = await saveToSolid(p);
     if (fileUrl) this.setState({
-      url: fileUrl
+      url: fileUrl,
+      linkedDataUrl: linkedDataUrl
     })
   }
 
   render() {
     const content = (this.state.personality) 
-    ? <DisplayPersonality personality={this.state.personality} url={this.state.url} />
+      ? <DisplayPersonality personality={this.state.personality} url={this.state.url} linkedData={this.state.linkedDataUrl} />
     : <Questionnaire setPersonality={this.setPersonality} />;
     return (
       <div className="bodySection">
